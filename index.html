@@ -1,0 +1,556 @@
+<!-- 이해윤 — Global Growth Marketer Portfolio v2 -->
+<style>
+  :root{
+    --bg:#0a0a0f; --surface:#14141c; --surface-2:#1b1b26; --border:#2a2a3a;
+    --text:#f0f0f5; --dim:#9494a8; --faint:#6b6b7d; --accent:#818cf8;
+    --accent-soft:rgba(129,140,248,.12); --pos:#34d399;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+  .section{padding:80px 0}
+  .eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+  h1{font-size:clamp(34px,6vw,56px);line-height:1.12;font-weight:800;letter-spacing:-1px}
+  h2{font-size:clamp(24px,4vw,32px);font-weight:750;letter-spacing:-.5px;margin-bottom:6px}
+  .sub{color:var(--dim);font-size:16px;margin-bottom:34px}
+  .hidden{display:none}
+
+  #v-main .hero{padding-top:108px}
+  .hero-name{color:var(--dim);font-weight:500}
+  .hero-tag{font-size:clamp(18px,2.4vw,22px);margin-top:22px;max-width:760px;font-weight:500}
+  .hero-desc{font-size:16px;color:var(--dim);margin-top:14px;max-width:760px}
+
+  /* metric cards */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:42px}
+  .mcard{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 18px;display:flex;flex-direction:column}
+  .m-top{font-size:12.5px;color:var(--dim);font-weight:600;margin-bottom:8px}
+  .m-num{font-size:clamp(23px,3.2vw,32px);font-weight:800;letter-spacing:-1px;line-height:1;color:var(--text)}
+  .m-viz{height:46px;margin:16px 0;display:flex;align-items:flex-end}
+  .m-lbl{font-size:12.5px;color:var(--dim);line-height:1.45;margin-top:auto}
+  .spark{width:100%;height:42px}
+  .bars{display:flex;align-items:flex-end;gap:6px;height:46px;width:100%}
+  .bars span{flex:1;background:linear-gradient(var(--accent),var(--accent-soft));border-radius:3px 3px 0 0}
+  .ring{width:46px;height:46px;border-radius:50%;background:conic-gradient(var(--accent) 216deg,var(--border) 216deg);display:flex;align-items:center;justify-content:center;position:relative}
+  .ring::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--surface)}
+  .ring span{position:relative;z-index:1;font-size:12px;font-weight:800;color:var(--accent)}
+  .stack{display:flex;flex-direction:column;gap:5px;width:100%}
+  .stack span{height:6px;background:var(--accent);border-radius:3px;opacity:.55}
+  .stack span:last-child{opacity:1}
+
+  .btns{display:flex;gap:12px;margin-top:38px;flex-wrap:wrap}
+  .btn{padding:13px 26px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;display:inline-block;cursor:pointer;border:none;font-family:inherit}
+  .btn-p{background:var(--accent);color:#0a0a0f}
+  .btn-g{background:transparent;border:1px solid var(--border);color:var(--text)}
+
+  /* project cards */
+  .plist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+  .pcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;cursor:pointer;display:flex;flex-direction:column;transition:all .14s;overflow:hidden}
+  .pcard:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .pc-thumb{height:120px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+  .pc-thumb svg{width:100%;height:100%}
+  .pc-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .pc-co{font-size:10px;letter-spacing:.5px;color:var(--faint)}
+  .pc-m{font-size:20px;font-weight:800;color:var(--accent);letter-spacing:-.5px;line-height:1}
+  .pc-t{font-size:15px;font-weight:650;letter-spacing:-.2px;line-height:1.45;color:var(--text)}
+  .pc-a{font-size:12px;color:var(--faint);font-weight:600;margin-top:auto}
+  .th-chat{display:flex;flex-direction:column;gap:5px;padding:18px 20px;width:100%}
+  .th-chat i{height:9px;border-radius:5px;display:block}
+  .th-chat i.l{background:#33334a;width:62%}
+  .th-chat i.r{background:var(--accent);width:52%;align-self:flex-end;opacity:.85}
+
+  /* timeline */
+  .tl{border-left:2px solid var(--border);margin-left:6px}
+  .tli{position:relative;padding:0 0 30px 26px}
+  .tli::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+  .tli.cur::before{background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+  .tl-date{font-size:13px;color:var(--faint);font-weight:600}
+  .tl-org{font-size:17px;font-weight:700;margin:2px 0}
+  .tl-roles{font-size:14px;color:var(--dim)}
+  .svc-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .svc{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 14px 6px 6px;font-size:13.5px;cursor:pointer;transition:all .14s;color:var(--text)}
+  .svc:hover{border-color:var(--accent);background:var(--surface-2)}
+  .mono{width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  /* skills */
+  .sg{margin-bottom:28px}
+  .sg h3{font-size:14px;color:var(--faint);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 24px}
+  .skill{display:flex;align-items:center;gap:10px}
+  .skill .ico{width:26px;height:26px;border-radius:7px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--accent);flex-shrink:0}
+  .skill .meta{flex:1;min-width:0}
+  .skill .nm{font-size:12.5px;display:flex;justify-content:space-between;gap:6px;margin-bottom:5px}
+  .skill .nm span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .skill .nm b{color:var(--accent);font-weight:700;flex-shrink:0}
+  .skill .track{height:5px;background:var(--surface-2);border-radius:3px;overflow:hidden}
+  .skill .fill{height:100%;background:linear-gradient(90deg,var(--accent),#a5aef9);border-radius:3px}
+
+  /* about */
+  .princ{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:40px}
+  .pr{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+  .pr .t{font-weight:700;margin-bottom:4px}
+  .pr .d{font-size:14px;color:var(--dim)}
+  .contact{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;display:flex;gap:32px;flex-wrap:wrap}
+  .contact a{color:var(--accent);text-decoration:none;font-weight:600}
+  .contact .cl{font-size:13px;color:var(--faint);display:block;margin-bottom:2px}
+
+  /* detail / service */
+  .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--accent);cursor:pointer;font-weight:600;margin-bottom:28px;background:none;border:none;font-family:inherit}
+  #v-project .section,#v-service .section{padding-top:48px}
+  .d-co{font-size:12px;letter-spacing:1px;color:var(--faint);text-transform:uppercase}
+  .d-title{font-size:clamp(24px,4vw,34px);font-weight:800;margin:8px 0 12px;line-height:1.25;letter-spacing:-.5px}
+  .d-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:24px}
+  .d-hero{display:flex;gap:28px;flex-wrap:wrap;background:var(--accent-soft);border:1px solid #2f2f52;border-radius:14px;padding:22px 24px;margin-bottom:30px}
+  .d-hm .n{font-size:28px;font-weight:800;color:var(--accent);letter-spacing:-.5px}
+  .d-hm .l{font-size:12px;color:var(--dim);margin-top:2px}
+  .d-blk{margin-bottom:26px}
+  .d-blk .bt{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+  .d-blk p{font-size:15px;color:var(--dim);line-height:1.75}
+  .d-blk ul{list-style:none}
+  .d-blk li{font-size:15px;color:var(--dim);padding:5px 0 5px 22px;position:relative}
+  .d-blk li::before{content:"–";position:absolute;left:4px;color:var(--accent)}
+  .d-res{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+  .d-res li{color:var(--text)}
+  .d-res li::before{content:"▸";color:var(--accent)}
+  .svc-head{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+  .svc-head .mono{width:46px;height:46px;font-size:18px}
+  .svc-name{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.5px}
+
+  /* rich case study (P1) */
+  .rich-hero{background:linear-gradient(135deg,var(--surface),var(--surface-2));border:1px solid var(--border);border-radius:18px;padding:30px;margin-bottom:30px}
+  .rich-hero .jcurve{margin-top:18px;background:var(--bg);border-radius:12px;padding:14px}
+  .rich-hero .jcurve svg{width:100%;height:160px;display:block}
+  .jc-line{stroke-dasharray:600;stroke-dashoffset:600;animation:jcdraw 2s ease forwards}
+  @keyframes jcdraw{to{stroke-dashoffset:0}}
+  .jc-dot{opacity:0;animation:jcfade .4s ease forwards}
+  @keyframes jcfade{to{opacity:1}}
+  .milestone{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0}
+  .ms{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;position:relative}
+  .ms .d{font-size:12px;color:var(--faint);font-weight:600}
+  .ms .v{font-size:26px;font-weight:800;color:var(--accent);margin-top:6px;letter-spacing:-.5px}
+  .ms .arr{position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:16px;z-index:1}
+  .ms:last-child .arr{display:none}
+  .matrix{position:relative;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:0;aspect-ratio:1.6;max-width:520px;margin:6px 0 4px;overflow:hidden}
+  .matrix .axis-x{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:11px;color:var(--faint)}
+  .matrix .axis-y{position:absolute;left:10px;top:0;bottom:0;display:flex;align-items:center;writing-mode:vertical-rl;font-size:11px;color:var(--faint)}
+  .matrix .ln{position:absolute;background:var(--border)}
+  .matrix .lnx{left:8%;right:8%;top:50%;height:1px}
+  .matrix .lny{top:8%;bottom:8%;left:50%;width:1px}
+  .dotpt{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;text-align:center;line-height:1.1;padding:4px}
+  .dotpt.comp{background:var(--surface-2);border:1px solid var(--border);color:var(--dim);width:74px;height:74px}
+  .dotpt.us{background:var(--accent);color:#0a0a0f;width:88px;height:88px;box-shadow:0 0 0 6px var(--accent-soft)}
+  .insight{display:flex;gap:12px;align-items:flex-start;background:var(--accent-soft);border:1px solid #2f2f52;border-radius:12px;padding:16px 18px;margin:10px 0}
+  .insight .ic{font-size:18px;flex-shrink:0}
+  .insight .tx{font-size:14px;color:var(--text)}
+  .imgph{background:var(--surface-2);border:1.5px dashed var(--border);border-radius:12px;height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--faint);font-size:13px;margin:10px 0}
+  .imgph .ico{font-size:26px;opacity:.6}
+  .imgrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .imgrow .imgph{height:170px;text-align:center}
+  /* keyword table */
+  .ktbl{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .kt-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.2fr;align-items:center;padding:11px 16px;font-size:13.5px;border-bottom:1px solid var(--border)}
+  .kt-row:last-child{border-bottom:none}
+  .kt-row span:not(:first-child){text-align:center;color:var(--dim)}
+  .kt-head{background:var(--surface-2);font-size:12px;color:var(--faint);font-weight:600}
+  .kt-head span:not(:first-child){color:var(--faint)}
+  .kt-core{background:var(--accent-soft)}
+  .kt-core span:first-child{font-weight:700;color:var(--text)}
+  .kt-sub{background:rgba(129,140,248,.05)}
+  .kt-out{opacity:.55}
+  .badge{font-style:normal;font-size:10px;font-weight:800;padding:2px 8px;border-radius:5px;letter-spacing:.5px}
+  .badge.core{background:var(--accent);color:#0a0a0f}
+  .badge.sub{background:var(--surface-2);border:1px solid var(--accent);color:var(--accent)}
+
+  @media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}.plist{grid-template-columns:repeat(2,1fr)}.skills{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:720px){.princ{grid-template-columns:1fr}.skills{grid-template-columns:repeat(2,1fr)}.section{padding:60px 0}#v-main .hero{padding-top:80px}}
+  @media(max-width:520px){.metrics{grid-template-columns:1fr}.plist{grid-template-columns:1fr}.skills{grid-template-columns:1fr}.milestone{grid-template-columns:1fr}.ms .arr{display:none}.imgrow{grid-template-columns:1fr}.dotpt.comp{width:60px;height:60px;font-size:9px}.dotpt.us{width:72px;height:72px;font-size:9px}.kt-row{font-size:12px;padding:9px 10px}}
+</style>
+
+<!-- ============ MAIN ============ -->
+<div id="v-main">
+  <div class="wrap">
+    <section class="section hero">
+      <div class="eyebrow">🌐 Global Growth Marketer · 12년차</div>
+      <h1>이해윤<br><span class="hero-name">Lee Hae-yoon</span></h1>
+      <p class="hero-tag">아시아에서 북미까지, AI 서비스 Zero→One을 경험하고 스케일한 그로스 마케터</p>
+      <p class="hero-desc">유저 행동 관찰 → 데이터 검증 → 빠른 실행. 여러 문화권의 현지화를 직접 다뤄보았으며, MVP 검증부터 다국가 스케일업까지 그로스의 전 구간을 경험했습니다. <b style="color:var(--text)">한국·일본·대만·북미·유럽 등 다양한 시장에서 마케팅을 직접 운영</b>했습니다.</p>
+
+      <div class="metrics">
+        <div class="mcard">
+          <div class="m-top">북미&amp;유럽 매출</div>
+          <div class="m-num">+1,261%</div>
+          <div class="m-viz"><svg viewBox="0 0 120 42" preserveAspectRatio="none" class="spark"><polyline points="2,40 30,36 58,28 86,15 118,3" fill="none" stroke="var(--accent)" stroke-width="2.5"/><polygon points="2,40 30,36 58,28 86,15 118,3 118,42 2,42" fill="url(#g1)" opacity=".25"/><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="transparent"/></linearGradient></defs></svg></div>
+          <div class="m-lbl">6개월 만에 매출 성장 · dotdotdot</div>
+        </div>
+        <div class="mcard">
+          <div class="m-top">아시아 누적 사용자</div>
+          <div class="m-num">1.5M+</div>
+          <div class="m-viz"><div class="bars"><span style="height:20%"></span><span style="height:38%"></span><span style="height:55%"></span><span style="height:78%"></span><span style="height:100%"></span></div></div>
+          <div class="m-lbl">9개월 만에 150만 돌파 · 러비더비</div>
+        </div>
+        <div class="mcard">
+          <div class="m-top">글로벌 다국가 마케팅 운영</div>
+          <div class="m-num">60개국+</div>
+          <div class="m-viz"><div class="ring"><span>60+</span></div></div>
+          <div class="m-lbl">다양한 시장 진출·운영 경험</div>
+        </div>
+        <div class="mcard">
+          <div class="m-top">광고 집행 규모</div>
+          <div class="m-num">월 4억 원+</div>
+          <div class="m-viz"><div class="stack"><span style="width:30%"></span><span style="width:55%"></span><span style="width:80%"></span><span style="width:100%"></span></div></div>
+          <div class="m-lbl">소규모 예산부터 월 억 단위까지</div>
+        </div>
+      </div>
+
+      <div class="btns">
+        <a class="btn btn-p" href="mailto:haeyoon0667@gmail.com">연락하기</a>
+        <button class="btn btn-g" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">프로젝트 보기</button>
+      </div>
+    </section>
+
+    <section class="section" id="projects" style="border-top:1px solid var(--border)">
+      <div class="eyebrow">Case Studies</div>
+      <h2>주요 프로젝트</h2>
+      <p class="sub">카드를 클릭하면 상세 페이지로 이동합니다</p>
+      <div class="plist" id="plist"></div>
+    </section>
+
+    <section class="section" style="border-top:1px solid var(--border)">
+      <div class="eyebrow">Experience</div>
+      <h2>Experience (12년 차)</h2>
+      <p class="sub">서비스 이름을 클릭하면 해당 서비스의 성과 페이지로 이동합니다</p>
+      <div class="tl" id="timeline"></div>
+    </section>
+
+    <section class="section" style="border-top:1px solid var(--border)">
+      <div class="eyebrow">Growth Stack</div>
+      <h2>채널 · 데이터 · 크리에이티브</h2>
+      <p class="sub">숙련도 기반 스킬 맵</p>
+      <div class="sg"><h3>채널 · 퍼포먼스</h3><div class="skills">
+        <div class="skill"><div class="ico">M</div><div class="meta"><div class="nm"><span>Meta Ads</span><b>10</b></div><div class="track"><div class="fill" style="width:100%"></div></div></div></div>
+        <div class="skill"><div class="ico">G</div><div class="meta"><div class="nm"><span>Google Ads</span><b>9</b></div><div class="track"><div class="fill" style="width:90%"></div></div></div></div>
+        <div class="skill"><div class="ico">T</div><div class="meta"><div class="nm"><span>TikTok Ads</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">X</div><div class="meta"><div class="nm"><span>X Ads</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">A</div><div class="meta"><div class="nm"><span>Apple Search</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">MO</div><div class="meta"><div class="nm"><span>MOLOCO</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">AS</div><div class="meta"><div class="nm"><span>ASO</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">N</div><div class="meta"><div class="nm"><span>Naver Keywords</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">K</div><div class="meta"><div class="nm"><span>Kakao Biz Board</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+      </div></div>
+      <div class="sg"><h3>데이터 · 분석</h3><div class="skills">
+        <div class="skill"><div class="ico">Mx</div><div class="meta"><div class="nm"><span>Mixpanel</span><b>9</b></div><div class="track"><div class="fill" style="width:90%"></div></div></div></div>
+        <div class="skill"><div class="ico">Ab</div><div class="meta"><div class="nm"><span>Airbridge</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">Af</div><div class="meta"><div class="nm"><span>Appsflyer</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">Sg</div><div class="meta"><div class="nm"><span>Singular</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">Rd</div><div class="meta"><div class="nm"><span>Redash</span><b>7</b></div><div class="track"><div class="fill" style="width:70%"></div></div></div></div>
+        <div class="skill"><div class="ico">SQL</div><div class="meta"><div class="nm"><span>SQL</span><b>7</b></div><div class="track"><div class="fill" style="width:70%"></div></div></div></div>
+        <div class="skill"><div class="ico">Xl</div><div class="meta"><div class="nm"><span>Excel</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+      </div></div>
+      <div class="sg"><h3>크리에이티브 · 디자인</h3><div class="skills">
+        <div class="skill"><div class="ico">Fg</div><div class="meta"><div class="nm"><span>Figma</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">Ps</div><div class="meta"><div class="nm"><span>Photoshop</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">Ae</div><div class="meta"><div class="nm"><span>After Effects</span><b>8</b></div><div class="track"><div class="fill" style="width:80%"></div></div></div></div>
+        <div class="skill"><div class="ico">Pr</div><div class="meta"><div class="nm"><span>Premiere</span><b>7</b></div><div class="track"><div class="fill" style="width:70%"></div></div></div></div>
+      </div></div>
+    </section>
+
+    <section class="section" style="border-top:1px solid var(--border)">
+      <div class="eyebrow">How I Work</div>
+      <h2>일하는 방식</h2>
+      <p class="sub">단순히 숫자가 아니라, 유저의 목소리와 데이터를 함께 보며 임팩트를 만듭니다</p>
+      <div class="princ">
+        <div class="pr"><div class="t">🎯 구체적인 목표로 일합니다</div><div class="d">업무 수행이 아니라, 최종적으로 어떤 임팩트를 만들지를 기준으로 일합니다.</div></div>
+        <div class="pr"><div class="t">❓ 항상 Why를 생각합니다</div><div class="d">왜 필요한지, 최단시간에 최적의 방법으로 달성할지 끊임없이 고민합니다.</div></div>
+        <div class="pr"><div class="t">⚡ 빠르게 실행하고 학습합니다</div><div class="d">불확실한 상황에선 완벽한 계획보다 빠른 실행과 결과를 택합니다.</div></div>
+        <div class="pr"><div class="t">👥 사용자 관점에서 해결합니다</div><div class="d">숫자만이 아니라 실제 유저의 반응과 경험을 깊이 보고 방향을 잡습니다.</div></div>
+        <div class="pr"><div class="t">📊 데이터로 의사결정합니다</div><div class="d">감이 아닌 정량 지표로 A/B 테스트·CRM·성과 분석을 통해 최적화합니다.</div></div>
+        <div class="pr"><div class="t">💡 유연하게 적응합니다</div><div class="d">빠른 변화 속에서 새로운 도전을 긍정하고, 문제는 즉시 해결합니다.</div></div>
+      </div>
+      <div class="contact">
+        <div><span class="cl">Email</span><a href="mailto:haeyoon0667@gmail.com">haeyoon0667@gmail.com</a></div>
+        <div><span class="cl">Phone</span><a href="tel:01049290667">010-4929-0667</a></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ============ PROJECT DETAIL ============ -->
+<div id="v-project" class="hidden"><div class="wrap"><section class="section">
+  <button class="back" onclick="goBack()">← 돌아가기</button>
+  <div id="pd-rich"></div>
+  <div id="pd-std">
+    <div class="d-co" id="pd-co"></div>
+    <div class="d-title" id="pd-title"></div>
+    <div class="d-meta" id="pd-meta"></div>
+    <div class="d-hero" id="pd-hero"></div>
+    <div class="d-blk"><div class="bt">문제 / 배경</div><p id="pd-problem"></p></div>
+    <div class="d-blk"><div class="bt">액션</div><ul id="pd-action"></ul></div>
+    <div class="d-blk"><div class="bt">결과</div><ul class="d-res" id="pd-results"></ul></div>
+  </div>
+</section></div></div>
+
+<!-- ============ SERVICE PAGE ============ -->
+<div id="v-service" class="hidden"><div class="wrap"><section class="section">
+  <button class="back" onclick="goBack()">← 돌아가기</button>
+  <div class="svc-head"><div class="mono" id="sv-mono"></div><div>
+    <div class="d-co" id="sv-co"></div><div class="svc-name" id="sv-name"></div>
+  </div></div>
+  <div class="d-meta" id="sv-meta"></div>
+  <p class="sub" id="sv-desc" style="margin-bottom:30px"></p>
+  <div id="sv-body"></div>
+</section></div></div>
+
+<script>
+  const projects = {
+    p1:{co:"dotdotdot (Cupist)", title:"북미 AI Chat dotdotdot 브랜드 런칭 & BM 검증", metric:"0→1",
+      role:"0→1 런칭 리드 · 기여도 100%", period:"2025.02 ~", thumb:"chat",
+      hero:[["100%","기여도"],["J커브","유료화 후 매출 성장"]],
+      problem:"강력한 선행 주자(Character.ai·PolyBuzz 등)가 무료·구독제로 자리잡은 북미 AI Roleplay 시장에, 채팅당 과금 BM으로 진입해야 했던 상황.",
+      action:["경쟁사를 타겟·캐릭터·콘텐츠 정책 단위로 분석해 비어 있는 '여성향 × 리얼 3D × Roleplay' 영역 발굴","Reddit·Ko-fi·Fiverr에서 실제 결제 행동을 확인하고, ASO 분석으로 'AI Boyfriend' 키워드 선점 가능성 발굴","포지셔닝 확정 → 이후 모든 마케팅·제품 의사결정의 기준선","베타 유저 약 150명 운영 후 채팅당 과금 BM 적용"],
+      results:["유료화 당일 첫 결제 발생 — BM이 북미 여성 타겟에 작동함을 정량 검증","유료화 이후 일매출이 J커브로 빠르게 성장","확정한 포지셔닝이 전 마케팅·제품 의사결정의 기준선으로 정착"]},
+    p2:{co:"dotdotdot (Cupist)", title:"데이터 기반 그로스 의사결정 인프라 구축", metric:"0→1",
+      role:"데이터 인프라 0→1 (Mixpanel + Redash) · 기여도 100%", period:"2025.02 ~", thumb:"funnel",
+      hero:[["100%","기여도"],["6개","핵심 퍼널 이벤트"]],
+      problem:"합류 시점에 정의된 이벤트도 분석 도구도 없어, 그로스 의사결정에 필요한 데이터 환경 자체가 부재.",
+      action:["의사결정 질문을 먼저 정의하고 역산해 가입·탐색·검색·채팅·결제 등 핵심 퍼널 이벤트 체계 설계","이벤트 명세서로 개발팀과 구현, Mixpanel 메인 대시보드(DAU·WAU·리텐션·국가별) 구축","Redash 쿼리로 매출·결제·가입·환불·국가별 성과를 전 팀 대시보드로 운영"],
+      results:["'데이터로 발굴 → 실행 → 검증'의 그로스 휠 기반 마련","와우 포인트 발굴·다국가 예산 재배분이 모두 이 인프라 위에서 진행"]},
+    p3:{co:"dotdotdot (Cupist)", title:"초기 리텐션·결제 전환율 그로스", metric:"전환율 ↑",
+      role:"채팅·결제 리텐션 그로스 · 기여도 90%", period:"2025.02 ~", thumb:"convert",
+      hero:[["52→83%","채팅 시작 전환율"],["18→24%","D1 결제 전환율"]],
+      problem:"결제는 '더 대화하고 싶다'는 몰입에서 시작 — 신규 유저의 채팅·결제 리텐션을 초기 그로스의 핵심 과제로 정의.",
+      action:["채팅 시작 전 닉네임 입력 단계의 이탈 발견 → 디자이너 협업으로 퍼널 제거","메시지 횟수별 리텐션 분석으로 '메시지 20회'를 와우 포인트로 정의, 정책·온보딩·CRM·광고를 모두 정렬","결제/미결제 유저 대화 비교 분석 기반으로 첫 결제 프로모션·CRM 진행"],
+      results:["채팅 시작 전환율 52% → 83%","D1 결제 전환율 18% → 24%","메시지 10~19회 → 20~29회 구간서 D1 리텐션 2.82배·D3 5.02배 점프 발견"]},
+    p4:{co:"dotdotdot (Cupist)", title:"북미·다국가 퍼포먼스 마케팅 & 유닛 이코노믹스", metric:"다국가",
+      role:"퍼포먼스 마케팅 전략·실행 주도", period:"2025.02 ~", thumb:"globe",
+      hero:[["+322%","신규 매출 (확장기)"],["1.7~2.1x","영어권 회수배수"]],
+      problem:"다매체·다국가로 확장하면서 CAC가 LTV를 넘지 않도록 효율을 관리하고, 어디에 증액하고 어디서 철수할지 데이터로 결정해야 했던 상황.",
+      action:["Meta·Google·TikTok·X·MOLOCO·Apple Search를 Singular MMP 기반으로 운영 (iOS/AOS 분리)","LTV 5등급·3D ROAS 커트라인·손익분기(BEP) 기준으로 증액/중단·예산 재배분 룰 운영","국가별 CAC·LTV·리텐션·회수배수를 분석해 시장 단위 진입·철수까지 결정"],
+      results:["주력 시장을 다국가로 확장, 신규 매출 +322%·일 광고비 약 4배 확장 (팀 공동)","영어권 선진국 회수배수 1.7~2.1x (프랑스 2.07x 최고)로 건강한 구조 검증","UAE(0.71x) 등 유닛 이코노믹스 미성립 시장은 데이터 기반 철수"]},
+    p5:{co:"타인에이아이", title:"AI 채팅 '러비더비' PMF 검증 → 150만 사용자", metric:"1.5M+",
+      role:"프로덕트 마케터 · 그로스 리드", period:"2021.10 ~ 2024.12", thumb:"users",
+      hero:[["1.5M+","누적 사용자"],["0원 +270%","X 오가닉 유저 성장"]],
+      problem:"프로덕트가 없는 초기 단계에서 PMF를 검증하고, 검증된 가설을 대규모 그로스로 연결해야 했던 상황.",
+      action:["프로덕트 없이 PMF부터 검증","콘텐츠·소규모 예산 집행에서 월 억 단위 그로스·퍼포먼스 마케팅 전략 수립·실행으로 확장","X(Twitter) 오가닉·Affiliate·콘텐츠 중심의 저비용 채널 발굴·운영, Meta LMF 실험으로 효율 최적화"],
+      results:["150만 사용자 규모 앱으로 성장","X(Twitter) 0원 운영으로 신규 유저 270%↑·매출 400%↑, Affiliate로 가입자 191.6%↑","콘텐츠 160개 제작으로 누적 1,700만 뷰 · Meta LMF 실험 CPI 16% 절감"]},
+    p6:{co:"타인에이아이", title:"러비더비 일본 시장 바이럴", metric:"+3,280%",
+      role:"일본 시장 런칭 리드", period:"2021.10 ~ 2024.12", thumb:"viral",
+      hero:[["+3,280%","일본 신규 가입자"],["2주","런칭 소요"]],
+      problem:"동양권 신규 시장(일본)에 AI 채팅 서비스를 빠르게 안착시켜야 했던 0→1 상황.",
+      action:["타겟 분석부터 프롬프트 최적화·앱 출시까지 직접 진행","경쟁사 분석·유저 인터뷰로 현지화 포인트를 잡고 바이럴 마케팅 설계","재현 가능한 글로벌 확장 프로세스로 체계화"],
+      results:["바이럴 마케팅으로 일본 신규 가입자 3,280% 성장 · 2주 만에 런칭","프롬프트 만족도 6점 → 9점 개선","대만·태국 확장 기반 마련"]},
+    p7:{co:"dotdotdot (Cupist)", title:"데이터 기반 크리에이티브 그로스 & 글로벌 현지화", metric:"현지화",
+      role:"글로벌 광고 콘텐츠 전략·주간 성과 리뷰 리드 (NA·EU·JP·MENA)", period:"2025.02 ~", thumb:"creative",
+      hero:[["8개월+","주간 테스트 사이클 축적"],["4개 권역","시장별 현지화 플레이북"]],
+      problem:"같은 크리에이티브도 시장마다 다르게 작동 — 데이터로 검증된 '되는 포맷'과 시장별 현지화 원칙을 정립해야 했던 상황.",
+      action:["주간 가설 → 테스트 → 인사이트 사이클을 8개월 이상 축적해 검증된 '홈런 포맷' 발굴","크리에이티브 원칙 정립 (명령형 Hook, 2인칭 POV, 시즈널 소재, AI 키워드 노출 시 성과 상승 등)","시장별 현지화 플레이북 정립 — 일본·MENA·유럽·미국에서 같은 소재가 다르게 작동함을 정량·정성 검증","채널 특성 반영 — MOLOCO 등 채널별 소재 전략 분리"],
+      results:["데이터로 검증된 '홈런 포맷' 라이브러리 확보","시장별 현지화 플레이북으로 신규 시장 진입 속도·효율 향상","같은 소재의 시장별 작동 차이를 정량·정성으로 검증한 드문 글로벌 현지화 역량"]},
+    p8:{co:"dotdotdot · 타인에이아이", title:"CRM·라이프사이클 마케팅으로 리텐션·전환 개선", metric:"CRM",
+      role:"CRM·라이프사이클 마케팅 (세그먼트 설계 → 메시지 → 성과 검증)", period:"2019 ~ 현재", thumb:"crm",
+      hero:[["DAU·WAU","리텐션 지표 개선"],["매출↑","CRM 기반 전환 개선"]],
+      problem:"신규 유저를 모으는 것만큼 '다시 돌아오게' 만드는 것이 중요 — 획득 이후의 활성·재방문·재결제를 라이프사이클 관점에서 설계해야 했던 상황.",
+      action:["유저 행동·결제 단계별로 세그먼트를 나누고, 단계에 맞는 CRM 메시지·프로모션 설계 (탈잉 → dotdotdot)","와우 포인트(메시지 20회)·첫 결제 등 핵심 전환 지점에 맞춰 온보딩·푸시·프로모션을 정렬","결제/미결제 유저 행동 비교로 메시지를 최적화하고, 성과를 데이터로 검증해 반복"],
+      results:["탈잉: DAU·WAU 개선을 위한 CRM 설계로 핵심 활성 지표 향상","탈잉: CRM 마케팅으로 매출 증대 및 전환율 개선","dotdotdot: 첫 결제 프로모션·CRM으로 D1 결제 전환율 18% → 24%"]},
+    p9:{co:"dotdotdot · 타인에이아이", title:"VoC·유저 인사이트 운영으로 제품 개선 환류", metric:"VoC",
+      role:"VoC·CS 운영 → 인사이트 가공 → 제품팀 환류", period:"2021 ~ 현재", thumb:"voc",
+      hero:[["700건+","누적 VoC 분류·분석"],["일 30~50건","CS 인사이트 환류"]],
+      problem:"숫자만으로는 '왜'를 알 수 없음 — 유저의 실제 목소리를 체계적으로 모아 제품·마케팅 의사결정에 연결해야 했던 상황.",
+      action:["누적 700건+ VoC를 긍정·부정·기능요청·버그 등 카테고리로 분류해 인사이트로 가공·제품팀 전달","CS 응대 가이드를 직접 제작하고 마케팅·개발팀이 교대로 운영하는 체계 구축","일 30~50건(Discord 포함 ~100건) CS 인입을 제품 인사이트로 환류"],
+      results:["누적 700건+ VoC를 구조화해 제품 개선 우선순위의 정성 근거로 활용 (Chat Experience 약 47%)","CS 운영을 시스템화해 마케팅·개발팀이 함께 굴러가는 환류 구조 마련","정량(데이터)과 정성(VoC)을 함께 보는 의사결정 방식 정착"]}
+  };
+
+  const services = {
+    dotdotdot:{name:"dotdotdot", mono:"···", co:"Cupist · 2025.02 ~ 현재", role:"글로벌 그로스 마케터",
+      desc:"북미 AI 컴패니언 서비스. 0→1 런칭·유료화·데이터 인프라부터 북미·유럽 다국가 스케일까지 리드.", projects:["p1","p2","p3","p4","p7","p8","p9"]},
+    loveydovey:{name:"러비더비", mono:"러", co:"타인에이아이 · 2021.10 ~ 2024.12", role:"프로덕트 마케터 · 그로스 리드",
+      desc:"AI 채팅 서비스. 프로덕트 없는 PMF 검증부터 150만 사용자 규모 성장, 일본 0→1 바이럴까지.", projects:["p5","p6","p9"]},
+    orac:{name:"오르락", mono:"오", co:"타인에이아이 · 2021.10 ~ 2024.12", role:"프로덕트 마케터",
+      desc:"주식 포트폴리오 서비스.", wins:["주식 포트폴리오 서비스 PMF 검증","자산배분(다이렉트 인덱싱) 기능 PMF 검증","바이럴을 고려한 UI/UX 제작"]},
+    judy:{name:"JUDY (주디)", mono:"J", co:"타인에이아이 · 2021.10 ~ 2024.12", role:"프로덕트 마케터",
+      desc:"채팅형 AI 투자 어시스턴트.", wins:["채팅형 AI 투자 어시스턴트 PMF 검증"]},
+    shyft:{name:"Shyft", mono:"S", co:"타인에이아이 · 2021.10 ~ 2024.12", role:"프로덕트 마케터",
+      desc:"AI 커머스 마케팅 솔루션.", wins:["AI 커머스 마케팅 솔루션 PMF 검증"]},
+    cabinet:{name:"캐비닛", mono:"캐", co:"타인에이아이 · 2021.10 ~ 2024.12", role:"프로덕트 마케터",
+      desc:"웹소설 작가를 위한 소설 홍보 플랫폼.", wins:["웹소설 작가를 위한 소설 홍보 플랫폼 PMF 검증"]},
+    ayoh:{name:"에오 (Ay-oh)", mono:"에", co:"타인에이아이 · 2021.10 ~ 2024.12", role:"프로덕트 마케터",
+      desc:"AI 커버송 메이커.", wins:["AI 커버송 메이커 PMF 검증"]},
+    taling:{name:"탈잉 (Taling)", mono:"탈", co:"2019.05 ~ 2021.10", role:"퍼포먼스·그로스 마케터 · CRM 마케터",
+      desc:"재능 공유 클래스 플랫폼. 퍼포먼스 마케팅과 CRM으로 활성·매출 지표를 개선.", projects:["p8"]},
+    tlx:{name:"티엘엑스 (TLX)", mono:"T", co:"2017.10 ~ 2018.11", role:"콘텐츠 마케터",
+      desc:"콘텐츠 마케팅 기획·운영.", wins:["콘텐츠 마케팅 기획 및 운영"]},
+    ddukki:{name:"두끼 (다른)", mono:"두", co:"2017.03 ~ 2017.07", role:"퍼포먼스·브랜드 마케터",
+      desc:"외식 브랜드 마케팅.", wins:["퍼포먼스·브랜드 마케팅 운영"]}
+  };
+
+  const timelineData = [
+    {date:"2025.02 ~ 현재", org:"dotdotdot (Cupist)", roles:"글로벌 그로스 마케터 — 북미 AI 서비스 0→1 런칭·유료화·다국가 스케일 리드", cur:true, svc:[["dotdotdot","dotdotdot"]]},
+    {date:"2021.10 ~ 2024.12", org:"타인에이아이", roles:"운영팀 리드 · 그로스 리드 · 프로덕트 마케터 · 퍼포먼스·그로스 마케터",
+      svc:[["loveydovey","러비더비"],["orac","오르락"],["judy","JUDY"],["shyft","Shyft"],["cabinet","캐비닛"],["ayoh","에오"]]},
+    {date:"2019.05 ~ 2021.10", org:"탈잉 (Taling)", roles:"퍼포먼스·그로스 마케터 · CRM 마케터", svc:[["taling","탈잉"]]},
+    {date:"2017.10 ~ 2018.11", org:"티엘엑스 (TLX)", roles:"콘텐츠 마케터", svc:[["tlx","TLX"]]},
+    {date:"2017.03 ~ 2017.07", org:"다른 (두끼)", roles:"퍼포먼스·브랜드 마케터", svc:[["ddukki","두끼"]]},
+    {date:"2014.03 ~ 2016.11", org:"엔드리스드림 (너랑나랑)", roles:"콘텐츠 마케터", svc:[]}
+  ];
+
+  const order=["p1","p2","p3","p4","p5","p6","p7","p8","p9"];
+  const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const A="var(--accent)";
+  const thumbs={
+    chat:'<div class="th-chat"><i class="l"></i><i class="r"></i><i class="l"></i><i class="r"></i></div>',
+    funnel:'<svg viewBox="0 0 200 110"><rect x="35" y="20" width="130" height="16" rx="3" fill="'+A+'" opacity=".85"/><rect x="52" y="46" width="96" height="16" rx="3" fill="'+A+'" opacity=".6"/><rect x="68" y="72" width="64" height="16" rx="3" fill="'+A+'" opacity=".4"/></svg>',
+    convert:'<svg viewBox="0 0 200 110"><rect x="34" y="60" width="40" height="38" rx="3" fill="'+A+'" opacity=".45"/><rect x="124" y="26" width="40" height="72" rx="3" fill="'+A+'"/><path d="M82 70 L116 46" stroke="'+A+'" stroke-width="2.5" fill="none"/></svg>',
+    globe:'<svg viewBox="0 0 200 110"><circle cx="100" cy="55" r="36" fill="none" stroke="'+A+'" stroke-width="2"/><ellipse cx="100" cy="55" rx="14" ry="36" fill="none" stroke="'+A+'" stroke-width="1.6" opacity=".7"/><line x1="64" y1="55" x2="136" y2="55" stroke="'+A+'" stroke-width="1.6" opacity=".7"/><circle cx="118" cy="40" r="3.5" fill="'+A+'"/><circle cx="80" cy="68" r="3.5" fill="'+A+'"/></svg>',
+    users:'<svg viewBox="0 0 200 110"><g fill="'+A+'"><circle cx="70" cy="42" r="11"/><rect x="55" y="58" width="30" height="20" rx="8"/></g><g fill="'+A+'" opacity=".6"><circle cx="105" cy="46" r="9"/><rect x="93" y="60" width="24" height="16" rx="7"/></g><g fill="'+A+'" opacity=".4"><circle cx="135" cy="50" r="7"/><rect x="125" y="62" width="20" height="13" rx="6"/></g></svg>',
+    viral:'<svg viewBox="0 0 200 110"><circle cx="100" cy="55" r="8" fill="'+A+'"/><g stroke="'+A+'" stroke-width="1.6" opacity=".7"><line x1="100" y1="55" x2="55" y2="30"/><line x1="100" y1="55" x2="150" y2="28"/><line x1="100" y1="55" x2="48" y2="82"/><line x1="100" y1="55" x2="158" y2="80"/></g><g fill="'+A+'" opacity=".55"><circle cx="55" cy="30" r="5"/><circle cx="150" cy="28" r="5"/><circle cx="48" cy="82" r="5"/><circle cx="158" cy="80" r="5"/></g></svg>',
+    creative:'<svg viewBox="0 0 200 110"><rect x="40" y="28" width="34" height="54" rx="4" fill="'+A+'" opacity=".4"/><rect x="83" y="22" width="34" height="66" rx="4" fill="'+A+'" opacity=".7"/><rect x="126" y="32" width="34" height="46" rx="4" fill="'+A+'" opacity=".5"/></svg>',
+    crm:'<svg viewBox="0 0 200 110"><path d="M100 28 A27 27 0 1 1 73 55" fill="none" stroke="'+A+'" stroke-width="3"/><path d="M100 20 l10 9 l-10 9 z" fill="'+A+'"/><circle cx="100" cy="55" r="6" fill="'+A+'" opacity=".7"/></svg>',
+    voc:'<svg viewBox="0 0 200 110"><rect x="48" y="28" width="70" height="44" rx="10" fill="'+A+'" opacity=".75"/><path d="M62 72 l0 14 l16 -14 z" fill="'+A+'" opacity=".75"/><rect x="96" y="50" width="56" height="34" rx="9" fill="'+A+'" opacity=".4"/><path d="M138 84 l0 11 l-13 -11 z" fill="'+A+'" opacity=".4"/></svg>'
+  };
+
+  const plist=document.getElementById("plist");
+  function cardHTML(id){const p=projects[id];
+    return '<div class="pc-thumb">'+thumbs[p.thumb]+'</div>'+
+      '<div class="pc-body"><div class="pc-co">'+esc(p.co)+'</div>'+
+      '<div class="pc-t">'+esc(p.title)+'</div><div class="pc-a">자세히 →</div></div>';}
+  order.forEach(id=>{const c=document.createElement("div");c.className="pcard";c.onclick=()=>openProject(id);c.innerHTML=cardHTML(id);plist.appendChild(c);});
+
+  const tl=document.getElementById("timeline");
+  timelineData.forEach(t=>{const d=document.createElement("div");d.className="tli"+(t.cur?" cur":"");
+    let s="";if(t.svc.length){s='<div class="svc-links">'+t.svc.map(x=>'<span class="svc" onclick="openService(\''+x[0]+'\')"><span class="mono">'+esc(services[x[0]].mono)+'</span>'+esc(x[1])+' →</span>').join('')+'</div>';}
+    d.innerHTML='<div class="tl-date">'+esc(t.date)+'</div><div class="tl-org">'+esc(t.org)+'</div><div class="tl-roles">'+esc(t.roles)+'</div>'+s;tl.appendChild(d);});
+
+  let hist=["main"];
+  function show(v){["v-main","v-project","v-service"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(v).classList.remove("hidden");window.scrollTo(0,0);}
+  function openProject(id){const p=projects[id];
+    const rich=document.getElementById("pd-rich"), std=document.getElementById("pd-std");
+    if(id==="p1"){rich.innerHTML=richP1();rich.style.display="block";std.style.display="none";}
+    else{
+      rich.innerHTML="";rich.style.display="none";std.style.display="block";
+      document.getElementById("pd-co").textContent=p.co;
+      document.getElementById("pd-title").textContent=p.title;
+      document.getElementById("pd-meta").innerHTML='<span>역할 · '+esc(p.role)+'</span><span>기간 · '+esc(p.period)+'</span>';
+      document.getElementById("pd-hero").innerHTML=p.hero.map(h=>'<div class="d-hm"><div class="n">'+esc(h[0])+'</div><div class="l">'+esc(h[1])+'</div></div>').join('');
+      document.getElementById("pd-problem").textContent=p.problem;
+      document.getElementById("pd-action").innerHTML=p.action.map(a=>'<li>'+esc(a)+'</li>').join('');
+      document.getElementById("pd-results").innerHTML=p.results.map(r=>'<li>'+esc(r)+'</li>').join('');
+    }
+    hist.push("project:"+id);show("v-project");}
+
+  function richP1(){
+    return '<div class="d-co">dotdotdot (Cupist) · 2025.02 ~</div>'+
+    '<div class="d-title">북미 AI Chat dotdotdot 0→1 브랜드 런칭 & BM 검증</div>'+
+    '<div class="d-meta"><span>역할 · 0→1 런칭 리드 (시장·유저 리서치, 포지셔닝, 브랜드 컨셉, 베타 운영, BM 검증)</span><span>기여도 · 100% (디자인·개발 협업)</span></div>'+
+
+    // WHY
+    '<div class="d-blk"><div class="bt">Why · 배경</div><p>dotdotdot은 북미 AI Roleplay 시장에 진입하는 신규 서비스였습니다. Character.ai·PolyBuzz 같은 강력한 선행 주자가 자리잡았고 무료·구독제 BM이 표준인 카테고리였기에, 채팅당 과금으로 진입하는 dotdotdot이 "더 좋은 AI 채팅"으로 포지셔닝하면 묻힐 수밖에 없었습니다. 그래서 0→1의 목표를 <b style="color:var(--text)">"유저가 결제할 만한 가치를 가진 MVP를 만드는 것"</b>으로 잡고, 시장 리서치부터 정식 런칭·포지셔닝까지 전 과정을 리드했습니다.</p></div>'+
+
+    // HERO RESULT — J-curve
+    '<div class="rich-hero"><div style="font-size:13px;color:var(--dim);font-weight:600">결제 검증 · 유료화 이후 일매출 성장</div>'+
+    '<div style="font-size:28px;font-weight:800;letter-spacing:-1px;margin-top:4px;line-height:1.25">유료화 63일 만에 일매출 약 10배 성장<br><span style="font-size:16px;font-weight:600;color:var(--dim)">일 광고비 약 $200 수준에서 일매출 $1,000 돌파 — 효율적인 수익 구조 검증</span></div>'+
+    '<div class="jcurve"><svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet">'+
+      '<polyline class="jc-line" points="20,160 130,150 250,116 340,46 388,18" fill="none" stroke="var(--accent)" stroke-width="3"/>'+
+      '<polygon points="20,160 130,150 250,116 340,46 388,18 388,170 20,170" fill="var(--accent)" opacity=".15"/>'+
+      '<circle class="jc-dot" cx="20" cy="160" r="5" fill="var(--accent)" style="animation-delay:.5s"/>'+
+      '<circle class="jc-dot" cx="130" cy="150" r="5" fill="var(--accent)" style="animation-delay:.9s"/>'+
+      '<circle class="jc-dot" cx="250" cy="116" r="5" fill="var(--accent)" style="animation-delay:1.3s"/>'+
+      '<circle class="jc-dot" cx="388" cy="18" r="6" fill="var(--accent)" style="animation-delay:1.7s"/>'+
+      '<g class="jc-dot" style="animation-delay:.6s" fill="var(--text)" font-size="11" font-weight="700"><text x="20" y="150" text-anchor="start">첫 결제</text></g>'+
+      '<g class="jc-dot" style="animation-delay:1s" fill="var(--dim)" font-size="10"><text x="130" y="142" text-anchor="middle">D+6</text></g>'+
+      '<g class="jc-dot" style="animation-delay:1.4s" fill="var(--dim)" font-size="10"><text x="250" y="108" text-anchor="middle">D+22 · 약 5배</text></g>'+
+      '<g class="jc-dot" style="animation-delay:1.8s" fill="var(--text)" font-size="12" font-weight="800"><text x="388" y="12" text-anchor="end">D+63 · 약 10배</text></g>'+
+    '</svg></div>'+
+    '<p style="font-size:12.5px;color:var(--faint);margin-top:10px">유료화 당일 첫 결제 발생 → D+22 약 5배 → D+63 약 10배 성장(누적 J커브). 일 광고비 약 $200 수준의 효율적 구조에서 달성.</p></div>'+
+
+    // ACTION 1 — positioning matrix
+    '<div class="d-blk"><div class="bt">Action ① — 시장 리서치로 빈자리 발굴</div>'+
+    '<p>북미 AI Roleplay 경쟁사를 타겟·캐릭터 유형·콘텐츠 정책 단위로 직접 분석. 시장 대다수가 <b style="color:var(--text)">남성향·2D/애니</b> 중심임을 확인하고, 비어 있는 "여성향 × 리얼 3D" 사분면에 결제 니즈가 있을 것이라는 가설을 세웠습니다.</p>'+
+    '<div style="font-size:12px;color:var(--faint);margin:14px 0 8px">북미 AI Roleplay 시장 포지셔닝 매트릭스 · 타겟 × 캐릭터 유형</div>'+
+    '<div class="matrix"><div class="ln lnx"></div><div class="ln lny"></div>'+
+      '<span class="axis-x">남성향·중성 &nbsp;←&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→&nbsp; 여성향</span>'+
+      '<span class="axis-y">2D·애니 &nbsp;←&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→&nbsp; 3D 리얼</span>'+
+      '<div class="dotpt comp" style="left:13%;top:62%">Character.ai<br>2D·중성</div>'+
+      '<div class="dotpt comp" style="left:34%;top:70%">PolyBuzz<br>2D·중성</div>'+
+      '<div class="dotpt comp" style="left:62%;top:66%">Replika<br>2D 컴패니언</div>'+
+      '<div class="dotpt us" style="right:8%;top:13%">dotdotdot<br>여성향 × 3D 리얼</div>'+
+    '</div>'+
+    '<div class="insight"><div class="tx"><b style="color:var(--text)">가설</b> — "여성향 × 리얼한 3D 캐릭터" 사분면에 단독 진입. 고퀄리티 · NSFW 허용으로 차별화.</div></div></div>'+
+
+    // ACTION 2 — keyword table
+    '<div class="d-blk"><div class="bt">Action ② — 결제 의향의 행동 증거 확보</div>'+
+    '<p>경쟁사 리뷰에서 반복되는 불만(낮은 응답 퀄리티·짧은 기억력·NSFW 제한) 중 NSFW 제한에 집중. AppTweak ASO 분석으로 "AI Companion/Girlfriend"는 경쟁이 치열한 반면 <b style="color:var(--text)">"AI Boyfriend"는 검색량 있는 선점 가능 영역</b>임을 발견했습니다.</p>'+
+    '<div style="font-size:12px;color:var(--faint);margin:14px 0 8px">AppTweak 키워드 분석 · 검색량 × 난이도 × 관련성 교차</div>'+
+    '<div class="ktbl"><div class="kt-row kt-head"><span>Keyword</span><span>Vol</span><span>Diff</span><span>Rel</span><span>선정</span></div>'+
+      '<div class="kt-row kt-core"><span>ai boyfriend</span><span>48</span><span>43</span><span>94</span><span><i class="badge core">CORE</i></span></div>'+
+      '<div class="kt-row kt-core"><span>roleplay</span><span>47</span><span>62</span><span>45</span><span><i class="badge core">CORE</i></span></div>'+
+      '<div class="kt-row kt-sub"><span>anime boyfriend</span><span>17</span><span>20</span><span>79</span><span><i class="badge sub">SUB</i></span></div>'+
+      '<div class="kt-row kt-sub"><span>choice</span><span>36</span><span>9</span><span>51</span><span><i class="badge sub">SUB</i></span></div>'+
+      '<div class="kt-row kt-out"><span>companion</span><span>43</span><span>10</span><span>24</span><span>제외</span></div>'+
+      '<div class="kt-row kt-out"><span>chat</span><span>64</span><span>76</span><span>37</span><span>제외</span></div>'+
+      '<div class="kt-row kt-out"><span>ai</span><span>75</span><span>87</span><span>43</span><span>제외</span></div>'+
+    '</div>'+
+    '<p style="font-size:12px;color:var(--faint);margin-top:8px">선정 기준 — 관련성 40↑ · 난이도 70↓ · 검색량 15↑. companion·anime는 검색량이 높아도 관련성이 낮아 제외, chat·ai는 난이도가 높아 상위 진입 불가.</p>'+
+    '<div class="insight"><div class="tx">Reddit에서 여성 유저가 "Roleplay 파트너"를 직접 모집하고, Ko-fi·Fiverr 커미션 사이트에서는 함께 Roleplay할 사람을 <b style="color:var(--text)">돈을 주고 구하는 행동</b>까지 발견 — 결제 의향이 이미 검증된 영역이라는 강력한 신호.</div></div>'+
+    '<img src="https://drive.google.com/thumbnail?id=1Ibo6f9vSv_VtSI3u8GbFZZiY39Nvzui-&sz=w1000" alt="커미션 Roleplay 채팅" style="width:100%;border-radius:12px;border:1px solid var(--border);display:block" referrerpolicy="no-referrer">'+
+    '<div class="imgrow"><div class="imgph"><span class="ico">🖼️</span>인스타 3D AI 캐릭터 계정<br><span style="font-size:11px">[IMG-2] 계정 프로필</span></div><div class="imgph"><span class="ico">🖼️</span>인스타 게시물 반응(댓글)<br><span style="font-size:11px">[IMG-3] 댓글 반응</span></div></div></div>'+
+
+    // ACTION 3 — positioning + beta
+    '<div class="d-blk"><div class="bt">Action ③ — 포지셔닝 확정 & 베타 운영</div>'+
+    '<p><b style="color:var(--text)">"리얼한 3D AI 남자친구와의 Roleplay 서비스"</b>로 포지셔닝을 확정하고 디자이너·개발팀과 브랜드/제품 컨셉을 설계했습니다. 직접 커미션 Roleplay를 경험하며 대화 흐름·문장 구성까지 파악해 제품에 반영했습니다.</p>'+
+    '<ul><li>Discord·Reddit·이메일·광고 등 다채널로 베타 유저 약 150명 모집 (작가·크리에이터 20명 별도 관리)</li>'+
+    '<li>베타 유저별 티켓 단위 이슈 트래킹 시스템을 구축해 피드백을 체계적으로 수집·제품팀 전달</li></ul>'+
+    '<div class="imgph"><span class="ico">🖼️</span>App Store · dotdotdot Fantasy AI Boyfriend<br><span style="font-size:11px">[IMG-4] 앱스토어 스크린샷</span></div>'+
+    '<div class="imgrow"><div class="imgph"><span class="ico">🖼️</span>Discord 베타 피드백 (티켓 운영)<br><span style="font-size:11px">[IMG-5] Discord 화면</span></div><div class="imgph"><span class="ico">🖼️</span>이메일 유저 피드백<br><span style="font-size:11px">[IMG-6] 이메일 (개인정보 가림)</span></div></div></div>'+
+
+    // ACTION 4 — paywall + DPU chart
+    '<div class="d-blk"><div class="bt">Action ④ — 유료화로 BM 검증</div>'+
+    '<p>베타 약 2주 후 대화 퀄리티가 결제에 충분하다고 판단해 채팅당 과금 BM을 적용. "무료 유저가 대규모 이탈할 것"이라는 내부 우려에 대해 <b style="color:var(--text)">"이탈한다면 MVP가 결제 가치를 못 만든 것이니 지금 검증해야 한다"</b>고 설득하며 유료화를 진행했습니다.</p>'+
+    '<div style="font-size:12px;color:var(--faint);margin:14px 0 8px">결제 유저 성장 · DPU(일 결제 유저) 추이</div>'+
+    '<div class="jcurve" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px"><svg viewBox="0 0 400 160" preserveAspectRatio="xMidYMid meet">'+
+      dpuBars()+
+    '</svg></div>'+
+    '<p style="font-size:12.5px;color:var(--faint);margin-top:10px">유료화 첫날 DPU 2명 → D+36 50명 → D+89 100명. 채팅당 과금 결제 유저가 꾸준히 증가.</p></div>'+
+
+    // RESULT
+    '<div class="d-blk"><div class="bt">Result</div><ul class="d-res">'+
+    '<li>유료화 당일 첫 결제 발생 — 채팅당 과금 BM이 북미 여성 유저에게 작동함을 정량 검증</li>'+
+    '<li>유료화 63일 만에 일매출 약 10배 성장(J커브), 일 광고비 약 $200 수준의 효율적 구조에서 달성</li>'+
+    '<li>"여성향 × 3D × NSFW 허용 Roleplay" 포지셔닝이 이후 전 마케팅·제품의 기준선으로 정착</li></ul></div>'+
+
+    // REFLECTION
+    '<div class="d-blk"><div class="bt">Reflection</div><ul>'+
+    '<li>가장 가치 있는 인사이트는 데이터가 아닌 <b style="color:var(--text)">사람의 행동</b>에서 나온다 — Reddit·커미션 사이트에서 "이미 돈을 쓰는 행동"을 확인한 것이 결제 가능한 MVP 설계의 결정적 단서였습니다.</li>'+
+    '<li>그로스 의사결정은 "안전한 선택"이 아니라 "빨리 검증할 수 있는 선택"이어야 한다 — 검증을 미루면 BM 적합성 판단도 늦어집니다.</li>'+
+    '<li>북미 현지화 — 얼리어답터 성향이 강하고 성적 취향 존중·NSFW에 개방적이며, 타당한 이유가 있으면 유료화 같은 변화도 쉽게 납득하는 점이 동양권과의 큰 차이였습니다.</li></ul></div>';
+  }
+
+  function dpuBars(){
+    const h=[4,7,11,16,14,20,22,21,26,30,36,44,52,60,72,84,96,110,118,122];
+    const n=h.length, gap=3, bw=(400-(n-1)*gap)/n, base=130;
+    let s="";
+    for(let i=0;i<n;i++){const bh=h[i],x=i*(bw+gap),y=base-bh;
+      const hl=(i===0||i===10||i===17);
+      s+='<rect x="'+x.toFixed(1)+'" y="'+y+'" width="'+bw.toFixed(1)+'" height="'+bh+'" rx="2" fill="var(--accent)" opacity="'+(hl?1:.5)+'"/>';}
+    // labels
+    const x0=0*(bw+gap)+bw/2, x36=10*(bw+gap)+bw/2, x89=17*(bw+gap)+bw/2;
+    s+='<g fill="var(--text)" font-size="10" font-weight="700">'+
+       '<text x="'+x0.toFixed(1)+'" y="'+(base-4-6)+'" text-anchor="middle">2명</text>'+
+       '<text x="'+x36.toFixed(1)+'" y="'+(base-36-6)+'" text-anchor="middle">D+36 · 50명</text>'+
+       '<text x="'+x89.toFixed(1)+'" y="'+(base-110-6)+'" text-anchor="middle">D+89 · 100명</text>'+
+       '</g>';
+    s+='<text x="0" y="155" fill="var(--faint)" font-size="9">유료화 첫날</text>';
+    s+='<text x="400" y="155" fill="var(--faint)" font-size="9" text-anchor="end">약 6개월</text>';
+    return s;
+  }
+  function openService(id){const s=services[id];
+    document.getElementById("sv-mono").textContent=s.mono;
+    document.getElementById("sv-co").textContent=s.co;
+    document.getElementById("sv-name").textContent=s.name;
+    document.getElementById("sv-meta").innerHTML='<span>역할 · '+esc(s.role)+'</span>';
+    document.getElementById("sv-desc").textContent=s.desc;
+    const body=document.getElementById("sv-body");
+    if(s.projects){body.innerHTML='<div class="eyebrow">주요 프로젝트</div><div class="plist">'+s.projects.map(pid=>'<div class="pcard" onclick="openProject(\''+pid+'\')">'+cardHTML(pid)+'</div>').join('')+'</div>';}
+    else{body.innerHTML='<div class="d-blk"><div class="bt">주요 성과</div><ul class="d-res">'+s.wins.map(w=>'<li>'+esc(w)+'</li>').join('')+'</ul></div>';}
+    hist.push("service:"+id);show("v-service");}
+  function goBack(){hist.pop();const prev=hist[hist.length-1];
+    if(prev==="main")show("v-main");
+    else if(prev.startsWith("project:")){hist.pop();openProject(prev.split(":")[1]);}
+    else if(prev.startsWith("service:")){hist.pop();openService(prev.split(":")[1]);}}
+</script>
